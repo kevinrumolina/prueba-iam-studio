@@ -34,5 +34,31 @@ const matrixFiller = (rows, columns) => {
     }
 }
 
+const gridFiller = array => {
+    if(Array.isArray(array)) {
+        if(array.length === 3) {
+            gridCleaner();
+
+            for (let row = 1; row <= 3; row++) {
+                let rowItems = document.querySelectorAll(`.test-c .fila-${row} .item`);
+                for (let column = 1; column <= array[row-1]; column++) {
+                    rowItems[column - 1].innerText = '*';
+                }
+            }
+        } else {
+            console.log('El array no es de 3 numeros');
+        }
+    } else {
+        console.log('El valor ingresado a la función no es un array')
+    }
+}
+
+const gridCleaner = () => {
+    const testCItems = document.querySelectorAll(`.test-c .item`);
+
+    testCItems.forEach(element => element.innerText = "");
+}
+
 console.log(firstTenNumbers(2));
 matrixFiller(5,5);
+gridFiller([4,2,7]);
