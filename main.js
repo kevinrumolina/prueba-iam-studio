@@ -8,30 +8,45 @@ const firstTenNumbers = multiple => {
     return resultArray;
 };
 
-/*const gridConstructor = (rows, columns) => {
-    const gridContainer = document.createElement('section');
+const matrixCreator = (rows, columns) => {
+    let matrix = [];
+    
     for (let row = 1; row <= rows; row++) {
-        let rowComponent = Object.assign(document.createElement('div'), { className:`fila fila-${row}` });
+        let rowList = [];
 
         for (let column = 1; column <= columns; column++) {
-            let columnComponent = Object.assign(document.createElement('div'), { className: `item item-${column}` });
-
-            rowComponent.appendChild(columnComponent);
+            rowList.push(`${row},${column}`);
         }
 
-        gridContainer.appendChild(rowComponent);
+        matrix.push(rowList);
     }
 
-    document.querySelector('body').appendChild(gridContainer);
-}*/
+    return matrix;
+}
 
-const matrixFiller = (rows, columns) => {
-    for (let row = 1; row <= rows; row++) {
-        let rowItems = document.querySelectorAll(`.test-b .fila-${row} .item`);
-        for (let column = 1; column <= columns; column++) {
-            rowItems[column - 1].innerText = `${row},${column}`;
-        }
-    }
+const matrixReplacer = (rows, columns, selector) => {
+    const matrix = matrixCreator(rows, columns);
+    const mainContainer = Object.assign(document.createElement('div'), { className: selector });;
+    const title = Object.assign(document.createElement('h2'), { className: 'title' });
+
+    console.log(matrix);
+    title.innerText = `Matriz ${rows}x${columns}`;
+    mainContainer.appendChild(title);
+
+    matrix.forEach(row => {
+        const rowContainer = Object.assign(document.createElement('div'), { className: 'fila' });
+
+        row.forEach(column => {
+            const columnContainer = Object.assign(document.createElement('div'), { className: 'item' });
+
+            columnContainer.innerText = column;
+            rowContainer.appendChild(columnContainer);
+        });
+
+        mainContainer.appendChild(rowContainer);
+    });
+
+    document.querySelector('body').appendChild(mainContainer);
 }
 
 const gridFiller = array => {
@@ -42,12 +57,12 @@ const gridFiller = array => {
                 array[2] >= 1 && array[2]<=10) {
                     gridCleaner();
 
-            for (let row = 1; row <= 3; row++) {
-                let rowItems = document.querySelectorAll(`.test-c .fila-${row} .item`);
-                for (let column = 1; column <= array[row-1]; column++) {
-                    rowItems[column - 1].innerText = '*';
-                }
-            }
+                    for (let row = 1; row <= 3; row++) {
+                        let rowItems = document.querySelectorAll(`.test-c .fila-${row} .item`);
+                        for (let column = 1; column <= array[row-1]; column++) {
+                            rowItems[column - 1].innerText = '*';
+                        }
+                    }
             } else {
                 console.log('Alguno de los items del array es > que 10 o < que 1');
             }
@@ -66,5 +81,10 @@ const gridCleaner = () => {
 }
 
 console.log(firstTenNumbers(2));
-matrixFiller(5,5);
+matrixReplacer(5,6,'.test-b');
 gridFiller([4,2,7]);
+
+/*Segundo
+    representacion en memoria que represente la matriz y con ese objeto luego pintar html
+*/
+/*Tercer ejercicio preguntar al usuario por los numeros y botar alarmas si el usuario mete un dato incorrecto */
