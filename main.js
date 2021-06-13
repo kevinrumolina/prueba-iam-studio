@@ -79,9 +79,33 @@ const gridCleaner = () => {
     testCItems.forEach(element => element.innerText = "");
 }
 
+const numberChecker = position => {
+    let number;
+
+    do {
+        number = parseInt(prompt(`Ingrese el numero ${position} del array`));
+        isNaN(number) ? alert('El tipo de dato no es un numero') : number < 0 ? 
+        alert('El numero es menor que 1, ingrese un numero entre 1 y 10') : number > 10 ?
+        alert('El numero es mayor que 10, ingrese un numero entre 1 y 10') : console.log('el numero es correcto');
+    } while (number < 1 || number > 10 || isNaN(number));
+
+    return number
+}
+
+const numericArrayConstructor = positions => {
+    let array = [];
+
+    for(let i = 1; i <= positions; i++) {
+        array.push(numberChecker(i));
+    }  
+
+    console.log(array);
+    return(array);
+}
+
 console.log(firstTenNumbers(2));
 const testMatrix = matrixCreator(5,6);
-matrixReplacer(testMatrix,'.test-b');
-gridFiller([4,2,7]);
+matrixReplacer(testMatrix,'test-b');
 
-/*Tercer ejercicio preguntar al usuario por los numeros y botar alarmas si el usuario mete un dato incorrecto */
+const arrayTestC = numericArrayConstructor(3);
+gridFiller(arrayTestC);
