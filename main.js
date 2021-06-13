@@ -21,16 +21,15 @@ const matrixCreator = (rows, columns) => {
         matrix.push(rowList);
     }
 
+    console.log(matrix);
     return matrix;
 }
 
-const matrixReplacer = (rows, columns, selector) => {
-    const matrix = matrixCreator(rows, columns);
+const matrixReplacer = (matrix, selector) => {
     const mainContainer = Object.assign(document.createElement('div'), { className: selector });;
     const title = Object.assign(document.createElement('h2'), { className: 'title' });
 
-    console.log(matrix);
-    title.innerText = `Matriz ${rows}x${columns}`;
+    title.innerText = `Matriz ${matrix.length}x${matrix[0].length}`;
     mainContainer.appendChild(title);
 
     matrix.forEach(row => {
@@ -81,10 +80,8 @@ const gridCleaner = () => {
 }
 
 console.log(firstTenNumbers(2));
-matrixReplacer(5,6,'.test-b');
+const testMatrix = matrixCreator(5,6);
+matrixReplacer(testMatrix,'.test-b');
 gridFiller([4,2,7]);
 
-/*Segundo
-    representacion en memoria que represente la matriz y con ese objeto luego pintar html
-*/
 /*Tercer ejercicio preguntar al usuario por los numeros y botar alarmas si el usuario mete un dato incorrecto */
